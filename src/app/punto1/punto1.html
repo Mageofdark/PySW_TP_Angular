@@ -1,14 +1,18 @@
 <div class="container mt-4">
   <h2>Slide de Eventos</h2>
-  <div class="card">
-    <img [src]="'assets/' + eventos[indiceActual].img" class="card-img-top" [alt]="eventos[indiceActual].nombre">
-    <div class="card-body">
-      <h5 class="card-title">{{ eventos[indiceActual].nombre }}</h5>
-      <p class="card-text">{{ eventos[indiceActual].descripcion }}</p>
+  <div class="slide-container">
+    <button class="btn btn-primary btn-nav btn-left" (click)="anterior()" [disabled]="indiceActual === 0" title="Anterior">
+      <i class="bi bi-arrow-left-circle-fill"></i>
+    </button>
+    <div class="card">
+      <img [src]="'assets/' + eventos[indiceActual]?.img" class="card-img-top" [alt]="eventos[indiceActual]?.nombre">
+      <div class="card-body">
+        <h5 class="card-title">{{ eventos[indiceActual]?.nombre }}</h5>
+        <p class="card-text">{{ eventos[indiceActual]?.descripcion }}</p>
+      </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-between mt-3">
-    <button class="btn btn-primary" (click)="anterior()" [disabled]="indiceActual === 0">Anterior</button>
-    <button class="btn btn-primary" (click)="siguiente()" [disabled]="indiceActual === eventos.length - 1">Siguiente</button>
+    <button class="btn btn-primary btn-nav btn-right" (click)="siguiente()" [disabled]="indiceActual === eventos.length - 1" title="Siguiente">
+      <i class="bi bi-arrow-right-circle-fill"></i>
+    </button>
   </div>
 </div>
