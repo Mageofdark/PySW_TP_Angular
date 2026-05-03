@@ -1,18 +1,22 @@
 import { Component } from '@angular/core';
-import { CursosService } from '../../services/cursos';
-import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CursosService } from '../../services/cursos-service';
+import { InscripcionesService } from '../../services/inscripciones-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-inscripciones',
-  standalone: true,
+  selector: 'app-inscripciones-component',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './inscripciones.html',
-  styleUrl: './inscripciones.css',
+  templateUrl: './inscripciones-component.html',
+  styleUrl: './inscripciones-component.css',
+  standalone: true,
 })
 export class InscripcionesComponent {
-  constructor(private cursosService: CursosService) {}
-  
+  constructor(
+    private cursosService: CursosService,
+    private inscripcionesService: InscripcionesService
+  ){}
+
   get cursos(){
     return this.cursosService.cursos;
   }
@@ -54,13 +58,24 @@ export class InscripcionesComponent {
   registrar(){
     if(this.form.invalid){
       this.form.markAllAsTouched();
-      console.log('NO SE ENVIO', this.form.value, this.precioFinal);
-      alert('ENVIADO')
+      console.log('Datos form: ', this.form.value, this.precioFinal);
+      alert('NO SE ENVIO')
       return;
     }
 
-    console.log('ENVIADO', this.form.value, this.precioFinal);
-    alert('enviado')
+    const inscripcion = {
+      dni: this.form.value.dni!,
+      email: this.form.value.email!,
+      categoria: this.form.value.categoria!,
+      curso: this.form.value.curso!,
+      fecha: this.form.value.fecha!,
+      precio: this.precioFinal
+    }
+    this.inscripcionesService.agregar(inscripcion);
+    console.log('Datos form: ', this.form.value, this.precioFinal);
+    console.log('Array inscripciones', this.inscripcionesService.getInscripciones());
+
+    alert('ENVIADO')
 
     this.form.reset();
     this.precioFinal = 0;

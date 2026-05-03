@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home';
 import { AboutComponent } from './components/about/about';
 import { Punto1Component } from './punto1/punto1';
-import { InscripcionesComponent  } from './pages/inscripciones/inscripciones';
+import { InscripcionesComponent } from './pages/inscripciones-component/inscripciones-component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
