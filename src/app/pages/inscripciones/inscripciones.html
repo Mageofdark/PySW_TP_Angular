@@ -1,5 +1,5 @@
 <div class="container px-5"> 
-    <h2 class="mb-4 text-center"> FORMULARIO </h2>
+    <h2 class="mb-4 text-center"> FORMULARIO DE INSCRIPCIÓN </h2>
 
     <form [formGroup]="form" (ngSubmit)="registrar()" class="row g-3">
         <div class="col-md-4">
@@ -43,7 +43,7 @@
         <!-- Hacer calculo de precio -->
         <div class="col-md-6" *ngIf="precioFinal > 0">
             <label class="form-label">Precio final</label>
-            <input class="form-control" [value]="precioFinal" disabled>
+            <input class="form-control" [value]="precioFinalYDivisa" disabled>
         </div>
 
         <div>

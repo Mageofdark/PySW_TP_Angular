@@ -28,6 +28,7 @@ export class InscripcionesComponent {
 
   // calcular precio
   precioFinal = 0;
+  precioFinalYDivisa = '';
 
   calcularPrecio() {
     const cursoNombre = this.form.value.curso;
@@ -41,12 +42,13 @@ export class InscripcionesComponent {
     const categoria = this.form.value.categoria;
 
     if(categoria === 'estudiante'){
-      precio *= 0.65;
+      precio *= 0.65; // 35% de descuento
     }else if(categoria === 'egresado'){
-      precio *= 0.5;
+      precio *= 0.5; // 50% de descuento
     }// else -> no hay descuento porque es particular
 
     this.precioFinal = precio;
+    this.precioFinalYDivisa = precio + " ARS";
   }
 
   registrar(){
@@ -62,6 +64,7 @@ export class InscripcionesComponent {
 
     this.form.reset();
     this.precioFinal = 0;
+    this.precioFinalYDivisa = '';
     return;
   }
 }
