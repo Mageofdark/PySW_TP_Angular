@@ -15,4 +15,7 @@ export class InscripcionesService {
   getInscripciones(){
     return this.inscripciones;
   }
+  update(index: number, item: any) {
+    this.inscripciones[index] = item;
+  }
 }
