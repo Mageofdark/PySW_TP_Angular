@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CursosService } from '../../services/cursos-service';
 import { InscripcionesService } from '../../services/inscripciones-service';
 import { CommonModule } from '@angular/common';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-inscripciones-component',
@@ -12,14 +13,25 @@ import { CommonModule } from '@angular/common';
   standalone: true,
 })
 
-export class InscripcionesComponent {
+export class InscripcionesComponent implements OnInit{
 
-  inscripciones: any[] = [];
-  resumencursos: any = {};
-  estudiantes = 0;
-  egresados = 0;
-  particulares = 0;
-  general = 0;
+  inscripciones: {
+    dni: string;
+    email: string;
+    categoria: string;
+    curso: string;
+    fecha: Date;
+    precio: number;
+  }[] = [];
+
+  resumencursos: {
+    [curso: string]:{
+      estudiantes: number;
+      egresados: number;
+      particulares: number;
+      general: number;
+    }
+  } ={};
 
   constructor(
     private cursosService: CursosService,
@@ -27,7 +39,7 @@ export class InscripcionesComponent {
   ){}
 
 
-  ngOnInit(){
+  ngOnInit(): void{
     this.inscripciones = this.inscripcionesService.getInscripciones();
     this.calcularResumen();
   }
