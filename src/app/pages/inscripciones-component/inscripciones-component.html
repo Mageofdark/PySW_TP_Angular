@@ -55,4 +55,58 @@
             <button type="submit" class="btn btn-primary"> Registrar </button>
         </div>
     </form>
+
+    <!-- TABLA DE INSCRIPCIONES REALIZADAS -->
+    <h2 class="mb-4 mt-5 text-center"> INSCRIPCIONES REALIZADAS </h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>DNI</th>
+                <th>Email</th>
+                <th>Curso</th>
+                <th>Categoria</th>
+                <th>Precio</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let i of inscripciones">
+                <td> {{ i.fecha | date:'dd/MM/yyyy'}} </td>
+                <td> {{ i.dni }} </td>
+                <td> {{ i.email }} </td>
+                <td> {{ i.curso }} </td>
+                <td> {{ i.categoria }} </td>
+                <td> {{ i.precio | currency:'$ARS '}} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- TABLA DE RESUMEN-->
+
+    <h2 class="mb-4 mt-5 text-center">RESUMEN</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Curso</th>
+                <th>Estudiantes</th>
+                <th>Egresados</th>
+                <th>Particulares</th>
+                <th>Total general</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let curso of resumencursos | keyvalue">
+      <td>{{ curso.key }}</td>
+      <td>{{ curso.value.estudiantes }}</td>
+      <td>{{ curso.value.egresados }}</td>
+      <td>{{ curso.value.particulares }}</td>
+      <td>{{ curso.value.general }}</td>
+    </tr>
+        </tbody>
+    </table>
+
 </div>
