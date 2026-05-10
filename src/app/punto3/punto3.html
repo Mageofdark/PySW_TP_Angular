@@ -1,0 +1,148 @@
+<div class="container mt-5 text-center">
+
+    <h1 class="mb-4">
+        JUEGO DE MEMORIA
+    </h1>
+
+    <!-- PANTALLA INICIAL -->
+
+    <div *ngIf="mostrarInicio">
+
+        <h4 class="mb-4">
+            ¿Estás listo para desafiar a tu mente y poner a prueba tu memoria? En este juego tendrás que concentrarte, observar cada detalle y recordar la posición de las cartas para encontrar todas las parejas.
+        </h4>
+
+        <button
+        class="btn btn-primary btn-lg"
+        (click)="mostrarPantallaPreparacion()">
+
+            INTENTAR
+
+        </button>
+
+    </div>
+
+    <!-- PREPARACION -->
+
+    <div *ngIf="mostrarPreparacion">
+
+        <h4 class="mb-4 text-warning">
+            Acuérdate que solo tienes 10 intentos, una vez acabado esos 10 intentos y si todas las tarjetas no fueron emparejadas entonces habras perdido.
+        </h4>
+
+        <button
+        class="btn btn-success btn-lg"
+        (click)="iniciarJuego()">
+
+            INICIAR
+
+        </button>
+
+    </div>
+
+    <!-- JUEGO -->
+
+    <div *ngIf="juegoIniciado && !juegoTerminado">
+
+        <h4 class="mb-4">
+            Intentos restantes: {{intentos}}
+        </h4>
+
+        <div class="tablero">
+
+            <div
+            class="carta"
+            *ngFor="let carta of cartas"
+            (click)="intentar(carta)">
+
+                <div *ngIf="carta.descubierta">
+                    {{carta.emoji}}
+                </div>
+
+                <div *ngIf="!carta.descubierta">
+                    ❓
+                </div>
+
+            </div>
+
+        </div>
+
+        <button
+        class="btn btn-danger mt-4"
+        (click)="reiniciarJuego()">
+
+            REINICIAR
+
+        </button>
+
+    </div>
+
+    <!-- GANASTE -->
+
+    <div *ngIf="juegoTerminado && victoria">
+
+        <h1 class="text-success mt-4">
+        ¡GANASTE!
+        </h1>
+
+        <h4 class="mt-3">
+        Felicitaciones completaste el juego, tienes un IQ mayor al promedio
+        </h4>
+
+        <div class="mt-4">
+
+            <button
+            class="btn btn-success me-3"
+            (click)="reiniciarJuego()">
+
+                JUGAR OTRA VEZ
+
+            </button>
+
+            <button
+            class="btn btn-secondary"
+            (click)="volverInicio()">
+
+                SALIR
+
+            </button>
+
+    </div>
+
+</div>
+
+    <!-- PERDISTE -->
+
+    <div *ngIf="juegoTerminado && !victoria">
+
+        <h1 class="text-danger mt-4">
+            PERDISTE
+        </h1>
+
+        <h4 class="mt-3">
+            Mejor suerte para la próxima
+        </h4>
+
+        <div class="mt-4">
+
+            <button
+            class="btn btn-warning me-3"
+            (click)="reiniciarJuego()">
+
+                VOLVER A INTENTAR
+
+            </button>
+
+            <button
+            class="btn btn-secondary"
+            (click)="volverInicio()">
+
+                SALIR
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
